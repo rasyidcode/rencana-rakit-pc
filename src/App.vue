@@ -7,8 +7,8 @@
       </h4>
     </div>
 
-    <div class="mx-auto shadow-xl w-11/12 lg:w-3/5 h-2/3 -mt-24 bg-white rounded-lg relative">
-      <NavigationBarVue :hide="true" />
+    <div class="mx-auto shadow-xl w-11/12 lg:w-3/5 h-2/3 -mt-24 bg-white rounded-lg relative overflow-hidden">
+      <NavigationBarVue :hide="hideMenu" />
       <router-view />
     </div>
   </div>
@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      hideMenu: true
+      hideMenu: false
     }
   }
 }
