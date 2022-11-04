@@ -1,6 +1,6 @@
 <template>
     <div class="p-10">
-        <h1 class="text-center">Home</h1>
+        <h1 class="text-center">Entrance (for demo purpose only)</h1>
         <div class=" grid grid-cols-1 mt-5 gap-5">
             <button @click="gotoLoginUI()" class="rounded-xl text-center text-white py-3 
                 bg-gradient-to-r from-emerald-500 to-teal-500 px-20 block shadow-md
@@ -17,6 +17,11 @@
                 font-bold uppercase hover:from-emerald-700 hover:to-teal-700
                 active:from-emerald-900 active:to-teal-900 active:shadow-lg 
                 transition ease-in-out duration-150">Home UI</button>
+            <button @click="gotoDetailRencanaUI()" class="rounded-xl text-center text-white py-3 
+                bg-gradient-to-r from-emerald-500 to-teal-500 px-20 block shadow-md
+                font-bold uppercase hover:from-emerald-700 hover:to-teal-700
+                active:from-emerald-900 active:to-teal-900 active:shadow-lg 
+                transition ease-in-out duration-150">Detail Rencana UI</button>
             <button @click="gotoTambahRencanaUI()" class="rounded-xl text-center text-white py-3 
                 bg-gradient-to-r from-emerald-500 to-teal-500 px-20 block shadow-md
                 font-bold uppercase hover:from-emerald-700 hover:to-teal-700
@@ -27,11 +32,6 @@
                 font-bold uppercase hover:from-emerald-700 hover:to-teal-700
                 active:from-emerald-900 active:to-teal-900 active:shadow-lg 
                 transition ease-in-out duration-150">Edit Rencana UI</button>
-            <button @click="gotoTestDrawer()" class="rounded-xl text-center text-white py-3 
-                bg-gradient-to-r from-emerald-500 to-teal-500 px-20 block shadow-md
-                font-bold uppercase hover:from-emerald-700 hover:to-teal-700
-                active:from-emerald-900 active:to-teal-900 active:shadow-lg 
-                transition ease-in-out duration-150">Test Drawer</button>
         </div>
     </div>
 </template>
@@ -55,8 +55,8 @@ export default {
         gotoEditRencanaUI() {
             this.$router.push('/edit-rencana')
         },
-        gotoTestDrawer() {
-            this.$router.push('/test-drawer')
+        gotoDetailRencanaUI() {
+            this.$router.push('/detail-rencana')
         },
     }
 }
