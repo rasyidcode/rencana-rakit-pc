@@ -4,6 +4,8 @@ import RegisterView from '../views/RegisterView.vue';
 import HomeView from '../views/HomeView.vue';
 import EntranceView from '../views/EntranceView.vue';
 import DetailRencanaView from '../views/DetailRencanaView.vue';
+import TambahRencanaView from '../views/TambahRencanaView.vue';
+import EditRencanaView from '../views/EditRencanaView.vue';
 
 const routes = [
     {
@@ -30,6 +32,16 @@ const routes = [
         path: '/detail-rencana',
         name: 'detail-rencana-view',
         component: DetailRencanaView
+    },
+    {
+        path: '/tambah-rencana',
+        name: 'tambah-rencana-view',
+        component: TambahRencanaView
+    },
+    {
+        path: '/edit-rencana',
+        name: 'edit-rencana-view',
+        component: EditRencanaView
     },
 ]
 

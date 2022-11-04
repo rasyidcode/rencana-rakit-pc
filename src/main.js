@@ -21,7 +21,7 @@ library.add(
     faPencil,
     faTrash,
     faPencilAlt,
-    faPencilSquare
+    faPencilSquare,
 )
 
 createApp(App)
