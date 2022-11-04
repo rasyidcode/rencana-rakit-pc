@@ -3,6 +3,7 @@ import LoginView from '../views/LoginView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import HomeView from '../views/HomeView.vue';
 import EntranceView from '../views/EntranceView.vue';
+import DetailRencanaView from '../views/DetailRencanaView.vue';
 
 const routes = [
     {
@@ -24,6 +25,11 @@ const routes = [
         path: '/register',
         name: 'register-view',
         component: RegisterView
+    },
+    {
+        path: '/detail-rencana',
+        name: 'detail-rencana-view',
+        component: DetailRencanaView
     },
 ]
 
