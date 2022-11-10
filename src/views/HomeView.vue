@@ -34,6 +34,6 @@ export default {
         return {
             isActive: true
         }
-    }
+    },
 }
 </script>

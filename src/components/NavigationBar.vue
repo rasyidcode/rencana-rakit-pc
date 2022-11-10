@@ -44,7 +44,12 @@
 export default {
     name: 'NavigationBar',
     props: {
-        hide: Boolean
+        hide: Boolean,
+    },
+    data() {
+      return {
+        isActive: true,
+      }
     }
 }
 </script>

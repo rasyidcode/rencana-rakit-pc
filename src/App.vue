@@ -7,8 +7,8 @@
       </h4>
     </div>
 
-    <div class="mx-auto shadow-xl w-11/12 lg:w-3/5 h-2/3 -mt-24 bg-white rounded-lg relative overflow-hidden">
-      <NavigationBarVue :hide="hideMenu" />
+    <div class="mx-auto shadow-xl w-11/12 md:w-4/5 lg:w-3/5 xl:w-1/2 h-2/3 -mt-24 bg-white rounded-lg relative overflow-hidden">
+      <NavigationBarVue :hide="!isAuthenticated" />
       <router-view />
     </div>
   </div>
@@ -17,16 +17,17 @@
 
 <script>
 import NavigationBarVue from './components/NavigationBar.vue';
+import { auth } from './fbase';
 
 export default {
   name: 'App',
   components: {
     NavigationBarVue,
   },
-  data() {
-    return {
-      hideMenu: false
+  computed: {
+    isAuthenticated() {
+      return auth.currentUser != null;
     }
-  }
+  },
 }
 </script>
