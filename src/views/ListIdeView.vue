@@ -2,7 +2,7 @@
     <div class="pt-10 h-full">
         <div class=" flex justify-between px-10">
             <div class=" max-w-max">
-                <h1 class="text-xl font-normal uppercase tracking-wide">List Rencana</h1>
+                <h1 class="text-xl font-normal uppercase tracking-wide">List Ide</h1>
                 <div class=" h-1 w-full bg-emerald-500 mt-1"></div>
             </div>
             <div class="self-center">

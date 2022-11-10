@@ -4,7 +4,7 @@
             <div class="sm:w-9/12 sm:mx-auto md:w-4/6 lg:w-2/4">
                 <label for="username">Username</label>
                 <input type="text" name="username" autocomplete="username" 
-                    v-model="form.user" :class="{'border-red-500': form.hasError}"
+                    v-model="form.user" :class="{'border-red-500': form.userHasError}"
                     class=" mt-1 block w-full rounded-lg border-gray-300 
                     shadow-sm focus:border-emerald-500 transition duration-150 
                     ease-in-out">
@@ -12,21 +12,23 @@
             <div class="sm:w-9/12 sm:mx-auto md:w-4/6 lg:w-2/4">
                 <label for="password">Password</label>
                 <input type="password" name="password" autocomplete="current-password" 
-                    v-model="form.pass" :class="{'border-red-500': form.hasError}"
+                    v-model="form.pass" :class="{'border-red-500': form.passHasError}"
                     class=" mt-1 block w-full rounded-lg
                     border-gray-300 shadow-sm focus:border-emerald-500
                     transition duration-150 ease-in-out">
             </div>
             <PrimaryButton text="Login" :isLoading="isLoading" :isSubmit="true" />
         </form>
-        <p v-if="form.hasError" class=" -mt-36 text-center text-red-500">
-            Username or password is incorrect!
+        <p v-if="form.userHasError || form.passHasError" class=" -mt-36 text-center text-red-500">
+            {{ form.errorMsg }}
         </p>
     </div>
 </template>
 
 <script>
 import PrimaryButton from '../components/Buttons/PrimaryButton.vue';
+import { auth } from '../fbase';
+import { signInWithEmailAndPassword } from '@firebase/auth';
 
 export default {
     name: 'LoginView',
@@ -38,7 +40,8 @@ export default {
             form: {
                 user: null,
                 pass: null,
-                hasError: false,
+                userHasError: false,
+                passHasError: false,
                 errorMsg: ''
             },
             isLoading: false
@@ -54,11 +57,32 @@ export default {
             this.isLoading = true;
 
             setTimeout(() => {
-                console.log(this.form);
+                this.form.userHasError = false;
+                this.form.passHasError = false;
 
-                this.form.hasError = true;
-                this.form.errorMsg = 'Username or password is incorrect!';
-                this.isLoading = false;
+                signInWithEmailAndPassword(auth, `${this.form.user}@gmail.com`, this.form.pass)
+                    .then(user => {
+                        console.log(user);
+                        this.$router.push('/');
+                    })
+                    .catch(error => {
+                        console.log(error.code);
+                        switch(error.code) {
+                            case 'auth/user-not-found':
+                                this.form.errorMsg = 'User not found!';
+                                this.form.userHasError = true;
+                                break;
+                            case 'auth/wrong-password':
+                                this.form.errorMsg = 'Wrong password!';
+                                this.form.passHasError = true;
+                                break;
+                            default:
+                                this.form.errorMsg = 'Something went wrong!';
+                        }
+                    })
+                    .finally(() => {
+                        this.isLoading = false;
+                    })
             }, 3000);
         }
     }

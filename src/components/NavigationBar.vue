@@ -16,6 +16,17 @@
             </div>
           </div>
           <div class=" flex flex-col items-center group">
+            <font-awesome-icon icon="fa-solid fa-lightbulb" class=" text-white w-8 h-8 cursor-pointer
+                    hover:bg-emerald-600 p-3 rounded-full
+                    transition duration-150 ease-in-out" />
+
+            <div class=" absolute -top-6 flex-col items-center group-hover:flex hidden">
+              <span class=" z-10 p-2 bg-gray-700 text-xs 
+                        leading-none text-white whitespace-nowrap shadow-lg 
+                        rounded-sm">Ide</span>
+            </div>
+          </div>
+          <div class=" flex flex-col items-center group">
             <font-awesome-icon icon="fa-solid fa-database" class=" text-white w-8 h-8 cursor-pointer
                     hover:bg-emerald-600 p-3 rounded-full
                     transition duration-150 ease-in-out" />

@@ -24,10 +24,15 @@ export default {
   components: {
     NavigationBarVue,
   },
-  computed: {
-    isAuthenticated() {
-      return auth.currentUser != null;
+  data() {
+    return {
+      isAuthenticated: false
     }
+  },
+  beforeMount() {
+    auth.onAuthStateChanged(user => {
+      this.isAuthenticated = user != null;
+    });
   },
 }
 </script>

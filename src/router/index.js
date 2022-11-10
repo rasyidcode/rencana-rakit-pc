@@ -2,7 +2,8 @@ import { createRouter, createWebHashHistory } from "vue-router";
 
 import LoginView from '../views/LoginView.vue';
 import RegisterView from '../views/RegisterView.vue';
-import HomeView from '../views/HomeView.vue';
+import ListRencanaView from '../views/ListRencanaView.vue';
+import ListIdeView from '../views/ListIdeView.vue';
 import EntranceView from '../views/EntranceView.vue';
 import DetailRencanaView from '../views/DetailRencanaView.vue';
 import TambahRencanaView from '../views/TambahRencanaView.vue';
@@ -19,8 +20,14 @@ const routes = [
     // },
     {
         path: '/',
-        name: 'home-view',
-        component: HomeView,
+        name: 'list-rencana-view',
+        component: ListRencanaView,
+        meta: { requiredAuth: true }
+    },
+    {
+        path: '/ide',
+        name: 'list-ide-view',
+        component: ListIdeView,
         meta: { requiredAuth: true }
     },
     {
@@ -67,12 +74,13 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some((record) => record.meta.requiredAuth)) {
-        if (!auth.currentUser) {
-            next('/login');
-            return;
-        }
-
-        next();
+        auth.onAuthStateChanged(user => {
+            if (!user) {
+                next('/login');
+            } else {
+                next();
+            }
+        });
     } else {
         next();
     }
@@ -80,12 +88,13 @@ router.beforeEach((to, from, next) => {
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some((record) => record.meta.guest)) {
-        if (auth.currentUser) {
-            next('/');
-            return;
-        }
-
-        next();
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                next('/');
+            } else {
+                next();
+            }
+        });
     } else {
         next();
     }
