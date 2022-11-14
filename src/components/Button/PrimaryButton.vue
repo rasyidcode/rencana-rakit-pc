@@ -45,6 +45,6 @@ export default {
         buttonType() {
             return this.isSubmit ? 'submit' : 'button';
         }
-    }
+    },
 }
 </script>

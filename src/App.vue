@@ -8,25 +8,30 @@
     </div>
 
     <div class="mx-auto shadow-xl w-11/12 md:w-4/5 lg:w-3/5 xl:w-1/2 h-2/3 -mt-24 bg-white rounded-lg relative overflow-hidden">
-      <NavigationBarVue :hide="!isAuthenticated" />
+      <NavigationBarVue :hide="!isAuthenticated" @logout="showModal()" />
       <router-view />
     </div>
+
+    <AlertDialog :message="'Anda yakin ingin logout?'" :showing="showingModal" @close="closeModal()" @yes="logout()" />
   </div>
 
 </template>
 
 <script>
 import NavigationBarVue from './components/NavigationBar.vue';
+import AlertDialog from './components/AlertDialog.vue';
 import { auth } from './fbase';
 
 export default {
   name: 'App',
   components: {
     NavigationBarVue,
+    AlertDialog
   },
   data() {
     return {
-      isAuthenticated: false
+      isAuthenticated: false,
+      showingModal: false,
     }
   },
   beforeMount() {
@@ -34,5 +39,18 @@ export default {
       this.isAuthenticated = user != null;
     });
   },
+  methods: {
+    logout() {
+      auth.signOut();
+      this.$router.push('/login');
+      this.showingModal = false;
+    },
+    showModal() {
+      this.showingModal = true;
+    },
+    closeModal() {
+      this.showingModal = false;
+    }
+  }
 }
 </script>

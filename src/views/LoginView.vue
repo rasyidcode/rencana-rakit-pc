@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import PrimaryButton from '../components/Buttons/PrimaryButton.vue';
+import PrimaryButton from '../components/Button/PrimaryButton.vue';
 import { auth } from '../fbase';
 import { signInWithEmailAndPassword } from '@firebase/auth';
 
@@ -83,7 +83,7 @@ export default {
                     .finally(() => {
                         this.isLoading = false;
                     })
-            }, 3000);
+            }, 1000);
         }
     }
 }
