@@ -4,9 +4,11 @@ import LoginView from '../views/LoginView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import RencanaView from '../views/RencanaView.vue';
 import ListIdeView from '../views/ListIdeView.vue';
+import ListKomponenView from '../views/ListKomponenView.vue';
 import EntranceView from '../views/EntranceView.vue';
 import DetailRencanaView from '../views/DetailRencanaView.vue';
 import TambahRencanaView from '../views/TambahRencanaView.vue';
+import TambahIdeView from '../views/TambahIdeView.vue';
 import EditRencanaView from '../views/EditRencanaView.vue';
 import NotFoundView from '../views/NotFoundView.vue';
 
@@ -31,9 +33,21 @@ const routes = [
         meta: { requiredAuth: true }
     },
     {
+        path: '/tambah-ide',
+        name: 'tambah-ide-view',
+        component: TambahIdeView,
+        meta: { requiredAuth: true }
+    },
+    {
         path: '/ide',
         name: 'list-ide-view',
         component: ListIdeView,
+        meta: { requiredAuth: true }
+    },
+    {
+        path: '/komponen',
+        name: 'list-komponen-view',
+        component: ListKomponenView,
         meta: { requiredAuth: true }
     },
     {

@@ -64,6 +64,16 @@
 import PrimaryButton from '../components/Button/PrimaryButton.vue';
 import ItemRencana from '../components/ItemRencana.vue';
 import PageTitle from '../components/Text/PageTitle.vue';
+import { db } from '../fbase';
+import { 
+    collection, 
+    getDocs, 
+    query, 
+    where, 
+    limit 
+} from 'firebase/firestore';
+
+const plansCollection = query(collection(db, 'plans'), where('is_active', '==', true), limit(1));
 
 export default {
     name: 'RencanaView',
@@ -75,12 +85,25 @@ export default {
     data() {
         return {
             isEmpty: true,
+            plans: []
         }
     },
     methods: {
         goToBuatRencana() {
             this.$router.push('/tambah-rencana');
         }
+    },
+    mounted() {
+        getDocs(plansCollection).then(plans => {
+            plans.forEach(plan => {
+                this.plans.push(plan.data());
+            });
+
+            console.log(this.plans);
+        }).catch(err => {
+            console.log(err);
+        });
+
     }
 }
 </script>
