@@ -6,10 +6,14 @@
             class="mt-1 rounded-sm
                 border-gray-300 shadow-sm focus:border-emerald-500
                 transition duration-150 ease-in-out text-sm
-                focus:ring-0">
+                focus:ring-0"
+            :class="{
+                'border-red-500 focus:border-red-500': hasError
+            }">
             <option disabled value="">{{ placeholderOption }}</option>
             <option v-for="(option, i) in options" :value="option.value" :key="i">{{ option.text }}</option>
         </select>
+        <p v-if="hasError" class="text-[11px] font-semibold text-red-500">{{ errorMessage }}</p>
     </div>
 </template>
 
@@ -36,6 +40,14 @@ export default {
         placeholderOption: {
             type: String,
             required: true
+        },
+        hasError: {
+            type: Boolean,
+            default: false
+        },
+        errorMessage: {
+            type: String,
+            default: ''
         }
     }
 }

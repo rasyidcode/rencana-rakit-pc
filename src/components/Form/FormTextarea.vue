@@ -8,9 +8,14 @@
             focus:ring-0"
             :cols="width" 
             :rows="height" 
-            v-model="modelValue" 
-            :placeholder="placeholderText"></textarea>
-        <p class="text-[11px] italic font-semibold text-gray-400">{{ helperText }}</p>
+            :value="modelValue" 
+            @input="$emit('update:modelValue', $event.target.value)"
+            :placeholder="placeholderText"
+            :class="{
+                'border-red-500 focus:border-red-500': hasError
+            }"></textarea>
+        <p v-if="!hasError" class="text-[11px] italic font-semibold text-gray-400">{{ helperText }}</p>
+        <p v-else class="text-[11px] font-semibold text-red-500">{{ errorMessage }}</p>
     </div>
 </template>
 
@@ -46,6 +51,15 @@ export default {
             type: String,
             default: ''
         },
-    }
+        hasError: {
+            type: Boolean,
+            default: false
+        },
+        errorMessage: {
+            type: String,
+            default: ''
+        }
+    },
+    emits: ['update:modelValue']
 }
 </script>

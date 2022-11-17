@@ -5,9 +5,10 @@
         :placeholderText="placeholderText"
         :helperText="helperText"
         :required="required"
-        @inputBlur="addRupiah"
-        @inputFocus="removeRupiah"
-        />
+        :hasError="hasError"
+        :error-message="errorMessage"
+        @input-blur="addRupiah"
+        @input-focus="removeRupiah" />
 </template>
 
 <script>
@@ -33,6 +34,14 @@ export default {
             default: ''
         },
         helperText: {
+            type: String,
+            default: ''
+        },
+        hasError: {
+            type: Boolean,
+            default: false
+        },
+        errorMessage: {
             type: String,
             default: ''
         }
@@ -75,6 +84,7 @@ export default {
                 this.$emit('update:modelValue', v);
             }
         }
-    }
+    },
+    emits: ['update:modelValue']
 }
 </script>
