@@ -1,30 +1,28 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
-// Komponen
+// Komponen View
 import ListKomponenView from '../views/Komponen/ListKomponenView.vue';
 import TambahKomponenView from '../views/Komponen/TambahKomponenView.vue';
 import EditKomponenView from '../views/Komponen/EditKomponenView.vue';
 import DetailKomponenView from '../views/Komponen/DetailKomponenView.vue';
 
-// Ide
+// Ide View
 import ListIdeView from '../views/ListIdeView.vue';
 import TambahIdeView from '../views/TambahIdeView.vue';
 
-// Rencana
+// Rencana View
 import RencanaView from '../views/RencanaView.vue';
 import DetailRencanaView from '../views/DetailRencanaView.vue';
 import TambahRencanaView from '../views/TambahRencanaView.vue';
 import EditRencanaView from '../views/EditRencanaView.vue';
 
-// Others
+// Others View
 import LoginView from '../views/LoginView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import EntranceView from '../views/EntranceView.vue';
 import NotFoundView from '../views/NotFoundView.vue';
 
-import { auth } from '../fbase';
-
-
+import { auth } from '../firebase';
 
 const routes = [
     // Komponen

@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { auth } from '../fbase';
+import { auth } from '../firebase';
 import { createUserWithEmailAndPassword } from '@firebase/auth';
 
 export default {

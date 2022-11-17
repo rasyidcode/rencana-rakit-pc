@@ -69,7 +69,7 @@ import {
     getDocs,
     where
 } from 'firebase/firestore';
-import { db } from '../../fbase';
+import { firestore } from '../../firebase';
 
 // components
 import PageTitle from '../../components/Text/PageTitle.vue';
@@ -80,7 +80,7 @@ import FormInputSuggestion from '../../components/Form/FormInputSuggestion.vue';
 import FormDropdown from '../../components/Form/FormDropdown.vue';
 import FormButton from '../../components/Form/FormButton.vue';
 
-const componentsCollection = collection(db, 'components');
+const componentsCollection = collection(firestore, 'components');
 
 export default {
     name: 'TambahKomponenView',
@@ -210,6 +210,7 @@ export default {
                 .then(componentsRef => {
                     if (componentsRef.docs.length > 0) {
                         const component = componentsRef.docs.at(0).data();
+
                         // check component price, checkedAt & linkSource
                     }
 

@@ -20,7 +20,7 @@
 <script>
 import NavigationBar from './components/NavigationBar.vue';
 import AlertDialog from './components/AlertDialog.vue';
-import { auth } from './fbase';
+import { auth } from './firebase';
 
 export default {
   name: 'App',

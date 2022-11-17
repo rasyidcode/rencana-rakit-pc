@@ -64,7 +64,7 @@
 import PrimaryButton from '../components/Button/PrimaryButton.vue';
 import ItemRencana from '../components/ItemRencana.vue';
 import PageTitle from '../components/Text/PageTitle.vue';
-import { db } from '../fbase';
+import { firestore } from '../firebase';
 import { 
     collection, 
     getDocs, 
@@ -73,7 +73,7 @@ import {
     limit 
 } from 'firebase/firestore';
 
-const plansCollection = query(collection(db, 'plans'), where('is_active', '==', true), limit(1));
+const plansCollection = query(collection(firestore, 'plans'), where('is_active', '==', true), limit(1));
 
 export default {
     name: 'RencanaView',
