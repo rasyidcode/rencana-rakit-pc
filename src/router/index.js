@@ -1,55 +1,82 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
-import LoginView from '../views/LoginView.vue';
-import RegisterView from '../views/RegisterView.vue';
-import RencanaView from '../views/RencanaView.vue';
+// Komponen
+import ListKomponenView from '../views/Komponen/ListKomponenView.vue';
+import TambahKomponenView from '../views/Komponen/TambahKomponenView.vue';
+import EditKomponenView from '../views/Komponen/EditKomponenView.vue';
+import DetailKomponenView from '../views/Komponen/DetailKomponenView.vue';
+
+// Ide
 import ListIdeView from '../views/ListIdeView.vue';
-import ListKomponenView from '../views/ListKomponenView.vue';
-import EntranceView from '../views/EntranceView.vue';
+import TambahIdeView from '../views/TambahIdeView.vue';
+
+// Rencana
+import RencanaView from '../views/RencanaView.vue';
 import DetailRencanaView from '../views/DetailRencanaView.vue';
 import TambahRencanaView from '../views/TambahRencanaView.vue';
-import TambahIdeView from '../views/TambahIdeView.vue';
 import EditRencanaView from '../views/EditRencanaView.vue';
+
+// Others
+import LoginView from '../views/LoginView.vue';
+import RegisterView from '../views/RegisterView.vue';
+import EntranceView from '../views/EntranceView.vue';
 import NotFoundView from '../views/NotFoundView.vue';
 
 import { auth } from '../fbase';
 
+
+
 const routes = [
-    // {
-    //     path: '/',
-    //     name: 'entrance-view',
-    //     component: EntranceView
-    // },
+    // Komponen
+    {
+        path: '/komponen',
+        name: 'list-komponen-view',
+        component: ListKomponenView,
+        meta: { requiredAuth: true },
+    },
+    {
+        path: '/komponen/tambah',
+        name: 'tambah-komponen-view',
+        component: TambahKomponenView,
+        meta: { requiredAuth: true }
+    },
+    {
+        path: '/komponen/:komponenId/detail',
+        name: 'detail-komponen-view',
+        component: DetailKomponenView,
+        meta: { requiredAuth: true }
+    },
+    {
+        path: '/komponen/:komponenId/edit',
+        name: 'edit-komponen-view',
+        component: EditKomponenView,
+        meta: { requiredAuth: true }
+    },
+
     {
         path: '/',
         name: 'rencana-view',
         component: RencanaView,
         meta: { requiredAuth: true }
     },
-    {
-        path: '/tambah-rencana',
-        name: 'tambah-rencana-view',
-        component: TambahRencanaView,
-        meta: { requiredAuth: true }
-    },
-    {
-        path: '/tambah-ide',
-        name: 'tambah-ide-view',
-        component: TambahIdeView,
-        meta: { requiredAuth: true }
-    },
-    {
-        path: '/ide',
-        name: 'list-ide-view',
-        component: ListIdeView,
-        meta: { requiredAuth: true }
-    },
-    {
-        path: '/komponen',
-        name: 'list-komponen-view',
-        component: ListKomponenView,
-        meta: { requiredAuth: true }
-    },
+    // {
+    //     path: '/tambah-rencana',
+    //     name: 'tambah-rencana-view',
+    //     component: TambahRencanaView,
+    //     meta: { requiredAuth: true }
+    // },
+    // {
+    //     path: '/tambah-ide',
+    //     name: 'tambah-ide-view',
+    //     component: TambahIdeView,
+    //     meta: { requiredAuth: true }
+    // },
+    // {
+    //     path: '/ide',
+    //     name: 'list-ide-view',
+    //     component: ListIdeView,
+    //     meta: { requiredAuth: true }
+    // },
     {
         path: '/login',
         name: 'login-view',
@@ -62,24 +89,24 @@ const routes = [
     //     component: RegisterView,
     //     meta: { guest: true }
     // },
-    {
-        path: '/detail-rencana',
-        name: 'detail-rencana-view',
-        component: DetailRencanaView,
-        meta: { requiredAuth: true }
-    },
-    {
-        path: '/tambah-rencana',
-        name: 'tambah-rencana-view',
-        component: TambahRencanaView,
-        meta: { requiredAuth: true }
-    },
-    {
-        path: '/edit-rencana',
-        name: 'edit-rencana-view',
-        component: EditRencanaView,
-        meta: { requiredAuth: true }
-    },
+    // {
+    //     path: '/detail-rencana',
+    //     name: 'detail-rencana-view',
+    //     component: DetailRencanaView,
+    //     meta: { requiredAuth: true }
+    // },
+    // {
+    //     path: '/tambah-rencana',
+    //     name: 'tambah-rencana-view',
+    //     component: TambahRencanaView,
+    //     meta: { requiredAuth: true }
+    // },
+    // {
+    //     path: '/edit-rencana',
+    //     name: 'edit-rencana-view',
+    //     component: EditRencanaView,
+    //     meta: { requiredAuth: true }
+    // },
     {
         path: '/:pathMatch(.*)*',
         name: 'notfound-view',

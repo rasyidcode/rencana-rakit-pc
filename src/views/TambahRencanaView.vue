@@ -34,7 +34,7 @@
                 <input type="text" class=" mt-1 rounded-lg border-gray-300 
                     shadow-sm focus:border-emerald-500 text-sm"
                     data-type="currency" placeholder="Rp. 1.000.000,00"
-                    v-model="form.initial_budget" @blur="addRupiah()" @focusin="removeRupiah()">
+                    v-model="form.initial_budget" @blur="addRupiah()" @focus="removeRupiah()">
             </div>
             <button type="button" class="
                     max-w-max mx-auto mt-5

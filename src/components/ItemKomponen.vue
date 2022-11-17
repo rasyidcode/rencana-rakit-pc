@@ -1,5 +1,5 @@
 <template>
-    <div @click.prevent="click" class="py-3 cursor-pointer hover:bg-gray-50
+    <div @click.prevent="tap" class="py-3 cursor-pointer hover:bg-gray-50
         transition duration-150 ease-in-out">
         <h1 class="font-bold truncate">GTX 770 2GB DDR5</h1>
         <div class="flex flex-row justify-between">
@@ -28,15 +28,15 @@
 <script>
 export default {
     name: 'ItemKomponen',
-    props: {
-        komponen: {
-            type: Object,
-            required: true,
-        }
-    },
+    // props: {
+    //     komponen: {
+    //         type: Object,
+    //         required: true,
+    //     }
+    // },
     methods: {
-        click() {
-            this.$emit('click');
+        tap() {
+            this.$emit('tap');
         },
         delete() {
             this.$emit('delete');

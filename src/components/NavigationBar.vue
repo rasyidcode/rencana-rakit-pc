@@ -1,7 +1,7 @@
 <template>
   <div class=" w-full py-1 px-10 bg-gradient-to-tl 
         from-emerald-500 to-teal-500 absolute bottom-0 
-        rounded-b-lg flex justify-between" :class="{ hidden: hide }">
+        rounded-b-lg flex justify-between z-20" :class="{ hidden: hide }">
     <div class="flex gap-12">
       <div class=" flex flex-col items-center group">
         <font-awesome-icon icon="fa-solid fa-home" class=" text-white w-8 h-8 cursor-pointer
