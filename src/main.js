@@ -7,7 +7,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 
 /* import font awesome icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faBars, faChevronLeft, faChevronRight, faClose, faDatabase, faHome, faLightbulb, faLink, faMagnifyingGlass, faPencil, faPencilAlt, faPencilSquare, faPlus, faSignOut, faTrash, faWarning } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faCheck, faChevronLeft, faChevronRight, faClose, faDatabase, faHome, faInfo, faLightbulb, faLink, faMagnifyingGlass, faPencil, faPencilAlt, faPencilSquare, faPlus, faQuestion, faSignOut, faTrash, faWarning } from '@fortawesome/free-solid-svg-icons'
 
 /* import specific icons */
 
@@ -28,6 +28,9 @@ library.add(
     faWarning,
     faLink,
     faMagnifyingGlass,
+    faCheck,
+    faQuestion,
+    faInfo
 )
 
 createApp(App)
