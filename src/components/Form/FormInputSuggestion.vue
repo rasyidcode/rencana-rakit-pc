@@ -8,7 +8,8 @@
             :required="required"
             :hasError="hasError"
             :error-message="errorMessage"
-            @typing="inputTyping()"/>
+            @typing-key-up="inputTypingKeyUp"
+            @typing-key-down="inputTypingKeyDown"/>
         <div v-if="showSuggestion" class=" absolute border border-emerald-500 -mt-4
             bg-white w-full p-2 rounded-sm shadow-lg">
             <div class="flex justify-between border-b pb-1 items-center">
@@ -23,9 +24,7 @@
                 <h3 v-for="(suggestion, i) in suggestions"
                     @click="suggestionClick(suggestion)"
                     class="text-sm hover:bg-gray-100 cursor-pointer px-2 py-1"
-                    :class="{
-                        'font-bold': suggestionBold(suggestion)
-                    }" :key="i">{{ suggestion }}</h3>
+                    :key="i" v-html="suggestionBold(suggestion.name)"></h3>
             </div>
             <span v-if="suggestionLoading" class="text-sm">Loading...</span>
             <span v-else class="text-sm">{{ suggestions.length === 0 ? 'Not Found' : '' }}</span>
@@ -80,9 +79,17 @@ export default {
         }
     },
     emits: ['update:modelValue', 'findSuggestions'],
+    watch: {
+        formInputModel(val) {
+            
+        },
+    },
     data() {
         return {
             showSuggestion: false,
+            isTyping: false,
+            typingTimer: null,
+            matchedText: ''
         }
     },
     methods: {
@@ -92,16 +99,30 @@ export default {
             this.showSuggestion = false;
         },
         suggestionBold(sgt) {
-            return (this.modelValue != null && this.modelValue !== '') ? sgt.toLowerCase().indexOf(this.modelValue.toLowerCase()) >= 0 : false;
-        },
-        inputTyping() {
-            setTimeout(() => {
-                if (this.suggestions.length > 0) {
-                    this.showSuggestion = true;
+            // return (this.modelValue != null && this.modelValue !== '') ? sgt.toLowerCase().indexOf(this.modelValue.toLowerCase()) >= 0 : false;
+            let html = '';
 
-                    this.$emit('findSuggestions');
+            if (sgt.substr(0, this.modelValue.length).toLowerCase() === this.modelValue.toLowerCase()) {
+                html += `<span class="font-bold">${sgt.substr(0, this.modelValue.length)}</span>`;
+                html += `<span>${sgt.substr(this.modelValue.length)}</span>`;
+            } else {
+                html += `<span>${sgt}</span>`;
+            }
+
+            return html;
+        },
+        inputTypingKeyUp() {
+            clearTimeout(this.typingTimer);
+            this.typingTimer = setTimeout(() => {
+                if (!this.showSuggestion) {
+                    this.showSuggestion = true;
                 }
+
+                this.$emit('findSuggestions');
             }, 1000);
+        },
+        inputTypingKeyDown() {
+            clearTimeout(this.typingTimer);
         }
     },
     computed: {
