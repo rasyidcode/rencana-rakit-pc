@@ -12,7 +12,8 @@
             @input="$emit('update:modelValue', $event.target.value)"
             @blur="$emit('inputBlur')" 
             @focus="$emit('inputFocus')"
-            @keyup="$emit('typing')">
+            @keyup="$emit('typingKeyUp')"
+            @keydown="$emit('typingKeyDown')">
         <p v-if="!hasError" class="text-[11px] italic font-semibold text-gray-400">{{ helperText }}</p>
         <p v-else class="text-[11px] font-semibold text-red-500">{{ errorMessage }}</p>
     </div>
@@ -59,7 +60,8 @@ export default {
         'update:modelValue',
         'inputBlur',
         'inputFocus',
-        'typing'
+        'typingKeyUp',
+        'typingKeyDown'
     ],
 }
 </script>
