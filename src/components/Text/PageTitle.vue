@@ -23,11 +23,19 @@ export default {
         withBack: {
             type: Boolean,
             default: false
+        },
+        path: {
+            type: String,
+            default: ''
         }
     },
     methods: {
         navBack() {
-            this.$router.back();
+            if (this.path.length > 0) {
+                this.$router.push(this.path);
+            } else {
+                this.$router.back();
+            }
         }
     }
 }

@@ -107,6 +107,6 @@ export default {
             }, 3000);
         }
     },
-    emits: ['timerFinished']
+    emits: ['timerFinished', 'close']
 }
 </script>

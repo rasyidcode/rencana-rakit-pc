@@ -99,7 +99,7 @@ export default {
                 this.plans.push(plan.data());
             });
 
-            console.log(this.plans);
+            // console.log(this.plans);
         }).catch(err => {
             console.log(err);
         });
