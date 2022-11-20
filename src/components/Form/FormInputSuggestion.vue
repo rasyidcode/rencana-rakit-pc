@@ -22,7 +22,7 @@
                 'border-b': suggestionLoading
             }">
                 <h3 v-for="(suggestion, i) in suggestions"
-                    @click="suggestionClick(suggestion)"
+                    @click="suggestionClick(suggestion.name)"
                     class="text-sm hover:bg-gray-100 cursor-pointer px-2 py-1"
                     :key="i" v-html="suggestionBold(suggestion.name)"></h3>
             </div>
@@ -79,11 +79,6 @@ export default {
         }
     },
     emits: ['update:modelValue', 'findSuggestions'],
-    watch: {
-        formInputModel(val) {
-            
-        },
-    },
     data() {
         return {
             showSuggestion: false,
