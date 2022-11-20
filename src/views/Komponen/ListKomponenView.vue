@@ -25,18 +25,19 @@
                 <font-awesome-icon icon="fa-solid fa-plus" /> Tambah Komponen
             </button>
             <select class="border border-gray-300 rounded-sm text-sm
-                tracking-wide py-0">
+                tracking-wide py-0" v-model="selectedKomponen">
                 <option value="motherboard">Motherboard</option>
                 <option value="processor">Processor</option>
                 <option value="ram">RAM</option>
-                <option value="psu">Power Supply</option>
+                <option value="psu">PSU</option>
                 <option value="vga">VGA</option>
+                <option value="storage">Storage</option>
             </select>
         </div>
 
         <div class="flex-1 flex flex-col divide-y scrollbar pr-3 overflow-y-scroll
             pb-2.5">
-            <ItemKomponen @tap="navToDetail(i)" v-for="i in 10" :key="i" />
+            <ItemKomponen @tap="navToDetail(i)" v-for="(komponen, i) in components" :key="i" :komponen="komponen" />
         </div>
 
         <div class="flex justify-between items-center mb-12 mt-1">
@@ -50,6 +51,11 @@
 import PageTitle from '../../components/Text/PageTitle.vue';
 import ItemKomponen from '../../components/ItemKomponen.vue';
 import Pagination from '../../components/Pagination.vue';
+import { collection, getDocs, where } from 'firebase/firestore';
+import { firestore }  from '../../firebase'
+import { query } from 'express';
+
+const componentsCollection = collection(firestore, 'components');
 
 export default {
     name: 'ListKomponenView',
@@ -59,9 +65,25 @@ export default {
         Pagination,
     },
     data() {
-        return { }
+        return {
+            components: [],
+            selectedKomponen: 'motherboard'
+        }
     },
-    watch: { },
+    mounted() {
+        // getDocs(query(componentsCollection, where('type', '==', this.selectedKomponen)))
+        //     .then(docSnapshot => {
+        //         docSnapshot.forEach(doc => {
+        //             this.components.push({
+        //                 ...doc.data(),
+        //                 id: doc.id
+        //             });
+        //         });
+        //     })
+        //     .catch(err => {
+        //         console.log('Firebase error: ', err);
+        //     });
+    },
     methods: {
         navToTambahKomponen() {
             this.$router.push('/komponen/tambah');
