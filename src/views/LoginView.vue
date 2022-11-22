@@ -62,11 +62,9 @@ export default {
 
                 signInWithEmailAndPassword(auth, `${this.form.user}@gmail.com`, this.form.pass)
                     .then(user => {
-                        console.log(user);
                         this.$router.push('/');
                     })
                     .catch(error => {
-                        console.log(error.code);
                         switch(error.code) {
                             case 'auth/user-not-found':
                                 this.form.errorMsg = 'User not found!';

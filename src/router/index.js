@@ -25,6 +25,21 @@ import NotFoundView from '../views/NotFoundView.vue';
 
 import { auth } from '../firebase';
 
+function validateKomponenType(to) {
+    if (to.name === 'list-komponen-view' && ![
+        'motherboard',
+        'processor',
+        'ram',
+        'vga',
+        'storage',
+        'psu'
+    ].includes(to.params.type)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 const routes = [
     // Komponen
     {
@@ -38,24 +53,28 @@ const routes = [
         name: 'list-komponen-view',
         component: ListKomponenView2,
         meta: { requiredAuth: true },
+        beforeEnter: [validateKomponenType]
     },
     {
         path: '/komponen/:type/tambah',
         name: 'tambah-komponen-view',
         component: TambahKomponenView,
-        meta: { requiredAuth: true }
+        meta: { requiredAuth: true },
+        beforeEnter: [validateKomponenType]
     },
     {
         path: '/komponen/:type/:komponenId/detail',
         name: 'detail-komponen-view',
         component: DetailKomponenView,
-        meta: { requiredAuth: true }
+        meta: { requiredAuth: true },
+        beforeEnter: [validateKomponenType]
     },
     {
         path: '/komponen/:type/:komponenId/edit',
         name: 'edit-komponen-view',
         component: EditKomponenView,
-        meta: { requiredAuth: true }
+        meta: { requiredAuth: true },
+        beforeEnter: [validateKomponenType]
     },
     {
         path: '/',
@@ -146,21 +165,6 @@ router.beforeEach((to, from, next) => {
                 next();
             }
         });
-    } else {
-        next();
-    }
-});
-
-router.beforeEach((to, from, next) => {
-    if (to.name === 'list-komponen-view' && ![
-        'motherboard',
-        'processor',
-        'ram',
-        'vga',
-        'storage',
-        'psu'
-    ].includes(to.params.type)) {
-        next('/not-found');
     } else {
         next();
     }
