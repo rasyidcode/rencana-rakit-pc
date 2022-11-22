@@ -2,7 +2,7 @@
     <div class=" flex flex-col">
         <label class=" font-semibold text-sm">{{ labelText }}<span
             v-if="required" class=" text-red-500">*</span></label>
-        <select :value="modelValue" @change="$emit('update:modelValue', $event.target.value)"
+        <select :disabled="disabled" :value="modelValue" @change="$emit('update:modelValue', $event.target.value)"
             class="mt-1 rounded-sm
                 border-gray-300 shadow-sm focus:border-emerald-500
                 transition duration-150 ease-in-out text-sm
@@ -48,6 +48,10 @@ export default {
         errorMessage: {
             type: String,
             default: ''
+        },
+        disabled: {
+            type: Boolean,
+            default: false
         }
     }
 }

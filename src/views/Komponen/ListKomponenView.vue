@@ -51,9 +51,8 @@
 import PageTitle from '../../components/Text/PageTitle.vue';
 import ItemKomponen from '../../components/ItemKomponen.vue';
 import Pagination from '../../components/Pagination.vue';
-import { collection, getDocs, where } from 'firebase/firestore';
+import { collection, getDocs, where, query } from 'firebase/firestore';
 import { firestore }  from '../../firebase'
-import { query } from 'express';
 
 const componentsCollection = collection(firestore, 'components');
 
@@ -70,19 +69,37 @@ export default {
             selectedKomponen: 'motherboard'
         }
     },
+    watch: {
+        selectedKomponen(val) {
+            this.components = [];
+            
+            getDocs(query(componentsCollection, where('type', '==', val)))
+            .then(docSnapshot => {
+                docSnapshot.forEach(doc => {
+                    this.components.push({
+                        ...doc.data(),
+                        id: doc.id
+                    });
+                });
+            })
+            .catch(err => {
+                console.log('Firebase error: ', err);
+            });
+        }
+    },
     mounted() {
-        // getDocs(query(componentsCollection, where('type', '==', this.selectedKomponen)))
-        //     .then(docSnapshot => {
-        //         docSnapshot.forEach(doc => {
-        //             this.components.push({
-        //                 ...doc.data(),
-        //                 id: doc.id
-        //             });
-        //         });
-        //     })
-        //     .catch(err => {
-        //         console.log('Firebase error: ', err);
-        //     });
+        getDocs(query(componentsCollection, where('type', '==', this.selectedKomponen)))
+            .then(docSnapshot => {
+                docSnapshot.forEach(doc => {
+                    this.components.push({
+                        ...doc.data(),
+                        id: doc.id
+                    });
+                });
+            })
+            .catch(err => {
+                console.log('Firebase error: ', err);
+            });
     },
     methods: {
         navToTambahKomponen() {

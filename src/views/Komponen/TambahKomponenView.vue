@@ -8,12 +8,12 @@
 
         <!-- <button @click="showNotification = true">Show Notif</button> -->
 
-        <PageTitle text="Tambah Komponen" :withBack="true" :path="'/komponen'" class="mb-5" />
+        <PageTitle text="Tambah Komponen" :withBack="true" :path="`/komponen/${$route.params.type}`" class="mb-5" />
 
         <div class="h-4/5 flex flex-col gap-3 overflow-y-scroll scrollbar pr-3 py-3">
             <FormDropdown v-model="form.komponen.value" :label-text="'Komponen'" :placeholder-option="'Pilih Komponen'"
                 :has-error="form.komponen.hasError" :error-message="form.komponen.errMessage"
-                :options="komponenOptions" />
+                :options="komponenOptions" :disabled="true" />
             <FormInputSuggestion v-model="form.nama.value" @find-suggestions="findSuggestions"
                 :suggestionLoading="suggestionLoading" :label-text="'Nama'" :placeholder-text="'Masukkan Nama'"
                 :helper-text="'Contoh: GTX 770 2GB DDR5'" :suggestions="nameSuggestions" :has-error="form.nama.hasError"
@@ -294,9 +294,7 @@ export default {
                 });
         },
         findSuggestions() {
-            // console.log(this.suggestions[`${this.form.komponen.value}List`].slice(0, 10));
-
-            if (this.form.komponen.value.length > 0) {
+            if (this.form.komponen.value.length > 0 && (this.form.nama.value != null && this.form.nama.value.length > 0)) {
                 this.nameSuggestions = [
                     ...this.suggestions[`${this.form.komponen.value}List`]
                         .filter(komponen => komponen.name.toLowerCase().indexOf(this.form.nama.value.toLowerCase()) >= 0)
@@ -352,12 +350,15 @@ export default {
             this.notification.isShow = false;
         },
         clearForm() {
-            this.form.komponen.value    = '';
+            this.form.komponen.value    = this.$route.params.type;
             this.form.nama.value        = null;
             this.form.harga.value       = null;
             this.form.checkedDate.value = null;
             this.form.linkSource.value  = null;
         }
+    },
+    mounted() {
+        this.form.komponen.value = this.$route.params.type;
     }
 }
 </script>

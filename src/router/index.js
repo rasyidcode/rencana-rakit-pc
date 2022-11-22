@@ -151,4 +151,19 @@ router.beforeEach((to, from, next) => {
     }
 });
 
+router.beforeEach((to, from, next) => {
+    if (to.name === 'list-komponen-view' && ![
+        'motherboard',
+        'processor',
+        'ram',
+        'vga',
+        'storage',
+        'psu'
+    ].includes(to.params.type)) {
+        next('/not-found');
+    } else {
+        next();
+    }
+});
+
 export default router;
