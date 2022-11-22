@@ -1,7 +1,8 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
 // Komponen View
-import ListKomponenView from '../views/Komponen/ListKomponenView.vue';
+import KomponenGridView from '../views/Komponen/KomponenGridView.vue';
+import ListKomponenView2 from '../views/Komponen/ListKomponenView2.vue';
 import TambahKomponenView from '../views/Komponen/TambahKomponenView.vue';
 import EditKomponenView from '../views/Komponen/EditKomponenView.vue';
 import DetailKomponenView from '../views/Komponen/DetailKomponenView.vue';
@@ -28,29 +29,34 @@ const routes = [
     // Komponen
     {
         path: '/komponen',
-        name: 'list-komponen-view',
-        component: ListKomponenView,
+        name: 'komponen-grid-view',
+        component: KomponenGridView,
         meta: { requiredAuth: true },
     },
     {
-        path: '/komponen/tambah',
+        path: '/komponen/:type',
+        name: 'list-komponen-view',
+        component: ListKomponenView2,
+        meta: { requiredAuth: true },
+    },
+    {
+        path: '/komponen/:type/tambah',
         name: 'tambah-komponen-view',
         component: TambahKomponenView,
         meta: { requiredAuth: true }
     },
     {
-        path: '/komponen/:komponenId/detail',
+        path: '/komponen/:type/:komponenId/detail',
         name: 'detail-komponen-view',
         component: DetailKomponenView,
         meta: { requiredAuth: true }
     },
     {
-        path: '/komponen/:komponenId/edit',
+        path: '/komponen/:type/:komponenId/edit',
         name: 'edit-komponen-view',
         component: EditKomponenView,
         meta: { requiredAuth: true }
     },
-
     {
         path: '/',
         name: 'rencana-view',
