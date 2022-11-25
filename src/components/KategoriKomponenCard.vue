@@ -1,6 +1,5 @@
 <template>
-    <div @click="$emit('tap')"
-        class=" bg-gradient-to-r from-emerald-500 to-teal-500 p-5 
+    <div class=" bg-gradient-to-r from-emerald-500 to-teal-500 p-5 
         flex items-center justify-center cursor-pointer
         hover:from-emerald-700 hover:to-teal-700 transition
         duration-150 ease-in-out rounded-sm flex-col">

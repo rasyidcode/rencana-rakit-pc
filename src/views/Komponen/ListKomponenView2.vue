@@ -26,7 +26,9 @@
 
         <div @scroll="loadMore" v-if="components.length > 0" class="flex-1 flex flex-col divide-y scrollbar pr-3 overflow-y-scroll
             pb-2.5 mb-12">
-            <ItemKomponen @tap="navToDetail(i)" v-for="(komponen, i) in components" :key="i" :komponen="komponen" />
+            <ItemKomponen v-for="komponen in components" :key="komponen.id" :name="komponen.name"
+                :harga="komponen.prices[0].price" :link="komponen.prices[0].linkSource" :komponenId="komponen.id"
+                @item-hapus="showAlert = true" />
         </div>
         <div v-else class="flex justify-center items-center h-full">
             <h3 class="font-normal text-base text-gray-600
@@ -35,6 +37,8 @@
 
         <ScrollLoading :isLoading="isLoading" />
     </PageContainer>
+
+    <AlertDialog :message="'Hapus Komponen?'" :showing="showAlert" @close="showAlert = false" @yes="hapusKomponen" />
 </template>
 
 <script>
@@ -42,6 +46,7 @@ import PageTitle from '../../components/Text/PageTitle.vue';
 import ItemKomponen from '../../components/ItemKomponen.vue';
 import PageContainer from '../../components/PageContainer.vue';
 import ScrollLoading from '../../components/ScrollLoading.vue';
+import AlertDialog from '../../components/AlertDialog.vue';
 
 import { collection, getDocs, where, query, limit, startAfter, getDoc, doc, orderBy } from 'firebase/firestore';
 import { firestore } from '../../firebase'
@@ -54,13 +59,15 @@ export default {
         PageTitle,
         ItemKomponen,
         PageContainer,
-        ScrollLoading
+        ScrollLoading,
+        AlertDialog
     },
     data() {
         return {
             components: [],
             isLoading: false,
-            isLastData: false
+            isLastData: false,
+            showAlert: false
         }
     },
     async mounted() {
@@ -88,9 +95,9 @@ export default {
                         const lastDocSnap = await getDoc(lastRef);
                         const paramType = this.$route.params.type;
                         const nextSnapshot = await getDocs(
-                            query(componentsCollection, 
-                                where('type', '==', paramType), 
-                                startAfter(lastDocSnap), 
+                            query(componentsCollection,
+                                where('type', '==', paramType),
+                                startAfter(lastDocSnap),
                                 limit(10)
                             )
                         );
@@ -116,6 +123,9 @@ export default {
                 }
             }
         },
+        hapusKomponen() {
+            console.log('hapus komponen was fired!');
+        }
     }
 }
 </script>

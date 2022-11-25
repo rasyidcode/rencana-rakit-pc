@@ -4,16 +4,17 @@
 
         <div class="grid grid-cols-2 gap-5">
             <KategoriKomponenCard :title="'Motherboard'" :icon="'fa-solid fa-keyboard'"
-                @tap="$router.push('komponen/motherboard')" />
+                @click="$router.push({ name: 'list-komponen-view2', params: { type: 'motherboard' } })" />
             <KategoriKomponenCard :title="'Processor'" :icon="'fa-solid fa-microchip'"
-                @tap="$router.push('komponen/processor')" />
+                @click="$router.push({ name: 'list-komponen-view2', params: { type: 'processor' } })" />
             <KategoriKomponenCard :title="'RAM'" :icon="'fa-solid fa-memory'"
-                @tap="$router.push('komponen/ram')" />
+                @click="$router.push({ name: 'list-komponen-view2', params: { type: 'ram' } })" />
             <KategoriKomponenCard :title="'VGA'" :icon="'fa-solid fa-display'"
-                @tap="$router.push('komponen/vga')" />
+                @click="$router.push({ name: 'list-komponen-view2', params: { type: 'vga' } })" />
             <KategoriKomponenCard :title="'Storage'" :icon="'fa-solid fa-hard-drive'"
-                @tap="$router.push('komponen/storage')" />
-            <KategoriKomponenCard :title="'PSU'" :icon="'fa-solid fa-bolt'" @tap="$router.push('komponen/psu')" />
+                @click="$router.push('komponen/storage')" />
+            <KategoriKomponenCard :title="'PSU'" :icon="'fa-solid fa-bolt'"
+                @click ="$router.push({ name: 'list-komponen-view2', params: { type: 'psu' } })" />
         </div>
     </PageContainer>
 </template>
