@@ -1,18 +1,16 @@
 <template>
     <div class="p-5 h-full flex flex-col">
         <div class=" flex justify-between items-center mb-4">
-            <PageTitle text="Data Komponen"/>
+            <PageTitle text="Data Komponen" />
             <div class="flex items-center">
                 <div class="relative">
-                    <font-awesome-icon icon="fa-solid fa-magnifying-glass"
-                        class="text-emerald-500 absolute right-2 top-0 bottom-0 m-auto 
+                    <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="text-emerald-500 absolute right-2 top-0 bottom-0 m-auto 
                         cursor-pointer hover:bg-emerald-200 p-1 -mr-1 rounded-full
-                        transition duration-150 ease-in-out"/>
+                        transition duration-150 ease-in-out" />
                     <input type="text" class="bg-emerald-100 p-0 border-white
                         pl-2 py-1 pr-7 rounded-sm text-gray-600 text-sm
                         focus:ring-0 focus:border focus:border-emerald-500
-                        transition duration-150 ease-in-out"
-                        placeholder="Search...">
+                        transition duration-150 ease-in-out" placeholder="Search...">
                 </div>
             </div>
         </div>
@@ -20,8 +18,7 @@
         <div class="flex items-center justify-between mb-4">
             <button type="button" class="bg-emerald-500 text-sm
                 text-white px-2 rounded-sm hover:bg-emerald-700
-                transition duration-150 ease-in-out tracking-wide"
-                @click="navToTambahKomponen()">
+                transition duration-150 ease-in-out tracking-wide" @click="navToTambahKomponen()">
                 <font-awesome-icon icon="fa-solid fa-plus" /> Tambah Komponen
             </button>
             <select class="border border-gray-300 rounded-sm text-sm
@@ -52,7 +49,7 @@ import PageTitle from '../../components/Text/PageTitle.vue';
 import ItemKomponen from '../../components/ItemKomponen.vue';
 import Pagination from '../../components/Pagination.vue';
 import { collection, getDocs, where, query } from 'firebase/firestore';
-import { firestore }  from '../../firebase'
+import { firestore } from '../../firebase'
 
 const componentsCollection = collection(firestore, 'components');
 
@@ -72,19 +69,19 @@ export default {
     watch: {
         selectedKomponen(val) {
             this.components = [];
-            
+
             getDocs(query(componentsCollection, where('type', '==', val)))
-            .then(docSnapshot => {
-                docSnapshot.forEach(doc => {
-                    this.components.push({
-                        ...doc.data(),
-                        id: doc.id
+                .then(docSnapshot => {
+                    docSnapshot.forEach(doc => {
+                        this.components.push({
+                            ...doc.data(),
+                            id: doc.id
+                        });
                     });
+                })
+                .catch(err => {
+                    console.log('Firebase error: ', err);
                 });
-            })
-            .catch(err => {
-                console.log('Firebase error: ', err);
-            });
         }
     },
     mounted() {
@@ -106,7 +103,7 @@ export default {
             this.$router.push('/komponen/tambah');
         },
         navToDetail(id) {
-            this.$router.push({ name: 'detail-komponen-view', params: { 'komponenId': id }});
+            this.$router.push({ name: 'detail-komponen-view', params: { 'komponenId': id } });
         },
     }
 }

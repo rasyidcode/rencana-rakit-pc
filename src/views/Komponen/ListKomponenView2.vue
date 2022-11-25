@@ -2,17 +2,6 @@
     <PageContainer class="flex flex-col">
         <div class=" flex justify-between items-center mb-4">
             <PageTitle text="Data Komponen" :withBack="true" :path="'/komponen'" />
-            <div class="flex items-center">
-                <div class="relative">
-                    <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="text-emerald-500 absolute right-2 top-0 bottom-0 m-auto 
-                        cursor-pointer hover:bg-emerald-200 p-1 -mr-1 rounded-full
-                        transition duration-150 ease-in-out" />
-                    <input type="text" class="bg-emerald-100 p-0 border-white
-                        pl-2 py-1 pr-7 rounded-sm text-gray-600 text-sm
-                        focus:ring-0 focus:border focus:border-emerald-500
-                        transition duration-150 ease-in-out" placeholder="Search...">
-                </div>
-            </div>
         </div>
 
         <div class="flex items-center justify-between mb-4">
