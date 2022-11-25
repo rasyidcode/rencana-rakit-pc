@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import ItemKomponen from '../components/ItemKomponen.vue';
+import ItemKomponen from '../../components/ItemKomponen.vue';
 
 export default {
     name: 'DetailRencanaView',

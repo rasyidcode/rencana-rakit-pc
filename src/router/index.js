@@ -8,19 +8,19 @@ import EditKomponenView from '../views/Komponen/EditKomponenView.vue';
 import DetailKomponenView from '../views/Komponen/DetailKomponenView.vue';
 
 // Ide View
-import ListIdeView from '../views/ListIdeView.vue';
-import TambahIdeView from '../views/TambahIdeView.vue';
+// import ListIdeView from '../views/ListIdeView.vue';
+// import TambahIdeView from '../views/TambahIdeView.vue';
 
 // Rencana View
-import RencanaView from '../views/RencanaView.vue';
-import DetailRencanaView from '../views/DetailRencanaView.vue';
-import TambahRencanaView from '../views/TambahRencanaView.vue';
-import EditRencanaView from '../views/EditRencanaView.vue';
+import RencanaView from '../views/Rencana/RencanaView.vue';
+// import DetailRencanaView from '../views/DetailRencanaView.vue';
+// import TambahRencanaView from '../views/TambahRencanaView.vue';
+// import EditRencanaView from '../views/EditRencanaView.vue';
 
 // Others View
-import LoginView from '../views/LoginView.vue';
-import RegisterView from '../views/RegisterView.vue';
-import EntranceView from '../views/EntranceView.vue';
+import LoginView from '../views/Public/LoginView.vue';
+// import RegisterView from '../views/RegisterView.vue';
+// import EntranceView from '../views/EntranceView.vue';
 import NotFoundView from '../views/NotFoundView.vue';
 
 import { auth } from '../firebase';

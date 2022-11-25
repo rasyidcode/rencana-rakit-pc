@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import ItemRencana from '../components/ItemRencana.vue';
+import ItemRencana from '../../components/ItemRencana.vue';
 
 export default {
     name: 'HomeView',

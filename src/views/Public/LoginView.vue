@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import PrimaryButton from '../components/Button/PrimaryButton.vue';
-import { auth } from '../firebase';
+import PrimaryButton from '../../components/Button/PrimaryButton.vue';
+import { auth } from '../../firebase';
 import { signInWithEmailAndPassword } from '@firebase/auth';
 
 export default {

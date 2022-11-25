@@ -61,10 +61,10 @@
 </template>
 
 <script>
-import PrimaryButton from '../components/Button/PrimaryButton.vue';
-import ItemRencana from '../components/ItemRencana.vue';
-import PageTitle from '../components/Text/PageTitle.vue';
-import { firestore } from '../firebase';
+import PrimaryButton from '../../components/Button/PrimaryButton.vue';
+import ItemRencana from '../../components/ItemRencana.vue';
+import PageTitle from '../../components/Text/PageTitle.vue';
+import { firestore } from '../../firebase';
 import { 
     collection, 
     getDocs, 

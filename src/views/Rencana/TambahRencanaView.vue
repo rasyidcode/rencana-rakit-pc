@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import PageTitle from '../components/Text/PageTitle.vue';
+import PageTitle from '../../components/Text/PageTitle.vue';
 
 export default {
     name: 'TambahRencanaView',
