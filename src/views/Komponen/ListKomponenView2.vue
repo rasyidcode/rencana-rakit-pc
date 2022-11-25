@@ -28,7 +28,7 @@
             pb-2.5 mb-12">
             <ItemKomponen v-for="komponen in components" :key="komponen.id" :name="komponen.name"
                 :harga="komponen.prices[0].price" :link="komponen.prices[0].linkSource" :komponenId="komponen.id"
-                @item-hapus="showAlert = true" />
+                @item-hapus="showAlertHapus(komponen.id, komponen.ref)" />
         </div>
         <div v-else class="flex justify-center items-center h-full">
             <h3 class="font-normal text-base text-gray-600
@@ -48,7 +48,7 @@ import PageContainer from '../../components/PageContainer.vue';
 import ScrollLoading from '../../components/ScrollLoading.vue';
 import AlertDialog from '../../components/AlertDialog.vue';
 
-import { collection, getDocs, where, query, limit, startAfter, getDoc, doc, orderBy } from 'firebase/firestore';
+import { collection, getDocs, where, query, limit, startAfter, getDoc, doc, orderBy, deleteDoc } from 'firebase/firestore';
 import { firestore } from '../../firebase'
 
 const componentsCollection = collection(firestore, 'components');
@@ -67,7 +67,8 @@ export default {
             components: [],
             isLoading: false,
             isLastData: false,
-            showAlert: false
+            showAlert: false,
+            hapusData: null
         }
     },
     async mounted() {
@@ -97,6 +98,7 @@ export default {
                         const nextSnapshot = await getDocs(
                             query(componentsCollection,
                                 where('type', '==', paramType),
+                                orderBy('createdAt', 'asc'),
                                 startAfter(lastDocSnap),
                                 limit(10)
                             )
@@ -123,8 +125,19 @@ export default {
                 }
             }
         },
-        hapusKomponen() {
-            console.log('hapus komponen was fired!');
+        showAlertHapus(id, ref) {
+            this.showAlert = true;
+            this.hapusData = {
+                id: id,
+                ref: ref
+            };
+        },
+        async hapusKomponen() {
+            await deleteDoc(this.hapusData.ref);
+            
+            this.components = this.components.filter(komponen => komponen.id !== this.hapusData.id);
+            this.showAlert = false;
+            this.hapusData = null;
         }
     }
 }
