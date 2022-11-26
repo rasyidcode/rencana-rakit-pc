@@ -5,12 +5,11 @@ import KomponenGridView from '../views/Komponen/KomponenGridView.vue';
 import ListKomponenView2 from '../views/Komponen/ListKomponenView2.vue';
 import ManageKomponenView from '../views/Komponen/ManageKomponenView.vue';
 import DetailKomponenView from '../views/Komponen/DetailKomponenView.vue';
-// import TambahKomponenView from '../views/Komponen/TambahKomponenView.vue';
-// import EditKomponenView from '../views/Komponen/EditKomponenView.vue';
 
 // Ide View
-// import ListIdeView from '../views/ListIdeView.vue';
-// import TambahIdeView from '../views/TambahIdeView.vue';
+import ListIdeView from '../views/Ide/ListIdeView.vue';
+import ManageIdeView from '../views/Ide/ManageIdeView.vue';
+import DetailIdeView from '../views/Ide/DetailIdeView.vue';
 
 // Rencana View
 import RencanaView from '../views/Rencana/RencanaView.vue';
@@ -20,8 +19,6 @@ import RencanaView from '../views/Rencana/RencanaView.vue';
 
 // Others View
 import LoginView from '../views/Public/LoginView.vue';
-// import RegisterView from '../views/RegisterView.vue';
-// import EntranceView from '../views/EntranceView.vue';
 import NotFoundView from '../views/NotFoundView.vue';
 
 import { auth } from '../firebase';
@@ -42,40 +39,51 @@ function validateKomponenType(to) {
 }
 
 const routes = [
-    // Komponen
+    // #region Komponen Route
     {
         path: '/komponen',
         name: 'komponen-grid-view',
         component: KomponenGridView,
-        meta: { requiredAuth: true },
+        meta: { requiredAuth: true, module: 'komponen' },
     },
     {
         path: '/komponen/:type',
         name: 'list-komponen-view2',
         component: ListKomponenView2,
-        meta: { requiredAuth: true, validateType: true },
+        meta: { requiredAuth: true, validateType: true, module: 'komponen' },
         beforeEnter: [validateKomponenType]
     },
     {
         path: '/komponen/:type/manage',
         name: 'manage-komponen-view',
         component: ManageKomponenView,
-        meta: { requiredAuth: true, validateType: true },
+        meta: { requiredAuth: true, validateType: true, module: 'komponen' },
         beforeEnter: [validateKomponenType]
     },
     {
         path: '/komponen/:type/:komponenId',
         name: 'detail-komponen-view',
         component: DetailKomponenView,
-        meta: { requiredAuth: true, validateType: true },
+        meta: { requiredAuth: true, validateType: true, module: 'komponen' },
         beforeEnter: [validateKomponenType]
     },
+    // #endregion
+    // #region Ide Route
+    {
+        path: '/ide',
+        name: 'list-ide-view',
+        component: ListIdeView,
+        meta: { requiredAuth: true, module: 'ide' },
+    },
+    // #endregion
+    // #region Rencana Route
     {
         path: '/',
         name: 'rencana-view',
         component: RencanaView,
-        meta: { requiredAuth: true }
+        meta: { requiredAuth: true, module: 'rencana' }
     },
+    // #endregion
     {
         path: '/login',
         name: 'login-view',

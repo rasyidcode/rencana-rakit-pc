@@ -8,7 +8,7 @@
         </div>
         <div class=" border h-3/4 rounded-lg p-5 flex flex-col
             overflow-y-scroll divide-y divide-dashed scrollbar">
-            <ItemKomponen v-for="i in 10" :key="i" :id="i" />
+            <!-- <ItemKomponen v-for="i in 10" :key="i" :id="i" /> -->
         </div>
         <h3 class=" -m-3.5 text-center
             max-w-max py-1 px-3 rounded-full font-bold
@@ -18,12 +18,7 @@
 </template>
 
 <script>
-import ItemKomponen from '../components/ItemKomponen.vue';
-
 export default {
     name: 'DetailRencanaView',
-    components: {
-        ItemKomponen
-    }
 }
 </script>

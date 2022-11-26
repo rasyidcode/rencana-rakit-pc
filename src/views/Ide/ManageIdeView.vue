@@ -171,6 +171,6 @@
 
 <script>
 export default {
-    name: 'TambahRencanaView'
+    name: 'ManageIdeView'
 }
 </script>

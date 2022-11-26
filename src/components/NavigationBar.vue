@@ -6,7 +6,10 @@
       <div class=" flex flex-col items-center group">
         <font-awesome-icon icon="fa-solid fa-home" class=" text-white w-8 h-8 cursor-pointer
                     hover:bg-emerald-600 p-3 rounded-full
-                    transition duration-150 ease-in-out" :class="{ 'text-emerald-900': isActive }" />
+                    transition duration-150 ease-in-out" :class="{ 'text-emerald-900': $route.meta.module === 'rencana' }"
+                    @click="$router.push({
+                      name: 'rencana-view'
+                    })" />
         <div class=" absolute -top-6 items-center group-hover:flex hidden">
           <span class=" z-10 p-2 bg-gray-700 text-xs 
                         leading-none text-white whitespace-nowrap shadow-lg 
@@ -16,7 +19,10 @@
       <div class=" flex flex-col items-center group">
         <font-awesome-icon icon="fa-solid fa-lightbulb" class=" text-white w-8 h-8 cursor-pointer
                     hover:bg-emerald-600 p-3 rounded-full
-                    transition duration-150 ease-in-out" />
+                    transition duration-150 ease-in-out" :class="{ 'text-emerald-900': $route.meta.module === 'ide' }"
+                    @click="$router.push({
+                      name: 'list-ide-view'
+                    })" />
 
         <div class=" absolute -top-6 flex-col items-center group-hover:flex hidden">
           <span class=" z-10 p-2 bg-gray-700 text-xs 
@@ -27,7 +33,10 @@
       <div class=" flex flex-col items-center group">
         <font-awesome-icon icon="fa-solid fa-database" class=" text-white w-8 h-8 cursor-pointer
                     hover:bg-emerald-600 p-3 rounded-full
-                    transition duration-150 ease-in-out" />
+                    transition duration-150 ease-in-out" :class="{ 'text-emerald-900': $route.meta.module === 'komponen' }"
+                    @click="$router.push({
+                      name: 'komponen-grid-view'
+                    })" />
 
         <div class=" absolute -top-6 flex-col items-center group-hover:flex hidden">
           <span class=" z-10 p-2 bg-gray-700 text-xs 
@@ -59,15 +68,10 @@ export default {
   props: {
     hide: Boolean,
   },
-  data() {
-    return {
-      isActive: true,
-    }
-  },
   methods: {
     logout() {
       this.$emit('logout');
     }
-  }
+  },
 }
 </script>
