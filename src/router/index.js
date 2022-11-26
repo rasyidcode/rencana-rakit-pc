@@ -41,27 +41,27 @@ function validateKomponenType(to) {
 const routes = [
     // #region Komponen Route
     {
-        path: '/komponen',
+        path: '/rencana-rakit-pc/komponen',
         name: 'komponen-grid-view',
         component: KomponenGridView,
         meta: { requiredAuth: true, module: 'komponen' },
     },
     {
-        path: '/komponen/:type',
+        path: '/rencana-rakit-pc/komponen/:type',
         name: 'list-komponen-view2',
         component: ListKomponenView2,
         meta: { requiredAuth: true, validateType: true, module: 'komponen' },
         beforeEnter: [validateKomponenType]
     },
     {
-        path: '/komponen/:type/manage',
+        path: '/rencana-rakit-pc/komponen/:type/manage',
         name: 'manage-komponen-view',
         component: ManageKomponenView,
         meta: { requiredAuth: true, validateType: true, module: 'komponen' },
         beforeEnter: [validateKomponenType]
     },
     {
-        path: '/komponen/:type/:komponenId',
+        path: '/rencana-rakit-pc/komponen/:type/:komponenId',
         name: 'detail-komponen-view',
         component: DetailKomponenView,
         meta: { requiredAuth: true, validateType: true, module: 'komponen' },
@@ -70,7 +70,7 @@ const routes = [
     // #endregion
     // #region Ide Route
     {
-        path: '/ide',
+        path: '/rencana-rakit-pc/ide',
         name: 'list-ide-view',
         component: ListIdeView,
         meta: { requiredAuth: true, module: 'ide' },
@@ -78,79 +78,23 @@ const routes = [
     // #endregion
     // #region Rencana Route
     {
-        path: '/',
+        path: '/rencana-rakit-pc/',
         name: 'rencana-view',
         component: RencanaView,
         meta: { requiredAuth: true, module: 'rencana' }
     },
     // #endregion
     {
-        path: '/login',
+        path: '/rencana-rakit-pc/login',
         name: 'login-view',
         component: LoginView,
         meta: { guest: true }
     },
     {
-        path: '/:pathMatch(.*)*',
+        path: '/rencana-rakit-pc/:pathMatch(.*)*',
         name: 'notfound-view',
         component: NotFoundView,
     },
-    // {
-    //     path: '/komponen/:type/tambah',
-    //     name: 'tambah-komponen-view',
-    //     component: TambahKomponenView,
-    //     meta: { requiredAuth: true, validateType: true },
-    //     beforeEnter: [validateKomponenType]
-    // },
-    // {
-    //     path: '/komponen/:type/:komponenId/edit',
-    //     name: 'edit-komponen-view',
-    //     component: EditKomponenView,
-    //     meta: { requiredAuth: true, validateType: true },
-    //     beforeEnter: [validateKomponenType]
-    // },
-    // {
-    //     path: '/tambah-rencana',
-    //     name: 'tambah-rencana-view',
-    //     component: TambahRencanaView,
-    //     meta: { requiredAuth: true }
-    // },
-    // {
-    //     path: '/tambah-ide',
-    //     name: 'tambah-ide-view',
-    //     component: TambahIdeView,
-    //     meta: { requiredAuth: true }
-    // },
-    // {
-    //     path: '/ide',
-    //     name: 'list-ide-view',
-    //     component: ListIdeView,
-    //     meta: { requiredAuth: true }
-    // },
-    // {
-    //     path: '/register',
-    //     name: 'register-view',
-    //     component: RegisterView,
-    //     meta: { guest: true }
-    // },
-    // {
-    //     path: '/detail-rencana',
-    //     name: 'detail-rencana-view',
-    //     component: DetailRencanaView,
-    //     meta: { requiredAuth: true }
-    // },
-    // {
-    //     path: '/tambah-rencana',
-    //     name: 'tambah-rencana-view',
-    //     component: TambahRencanaView,
-    //     meta: { requiredAuth: true }
-    // },
-    // {
-    //     path: '/edit-rencana',
-    //     name: 'edit-rencana-view',
-    //     component: EditRencanaView,
-    //     meta: { requiredAuth: true }
-    // },
 ]
 
 const router = createRouter({
@@ -162,7 +106,7 @@ router.beforeEach((to, from, next) => {
     if (to.matched.some((record) => record.meta.requiredAuth)) {
         auth.onAuthStateChanged(user => {
             if (!user) {
-                next('/login');
+                next({ name: 'login-view' });
             } else {
                 next();
             }
@@ -176,7 +120,7 @@ router.beforeEach((to, from, next) => {
     if (to.matched.some((record) => record.meta.guest)) {
         auth.onAuthStateChanged(user => {
             if (user) {
-                next('/');
+                next({ name: 'rencana-view' });
             } else {
                 next();
             }
