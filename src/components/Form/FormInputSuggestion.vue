@@ -9,7 +9,8 @@
             :hasError="hasError"
             :error-message="errorMessage"
             @typing-key-up="inputTypingKeyUp"
-            @typing-key-down="inputTypingKeyDown"/>
+            @typing-key-down="inputTypingKeyDown"
+            :disabled="disabled"/>
         <div v-if="showSuggestion" class=" absolute border border-emerald-500 -mt-4
             bg-white w-full p-2 rounded-sm shadow-lg">
             <div class="flex justify-between border-b pb-1 items-center">
@@ -76,6 +77,10 @@ export default {
         errorMessage: {
             type: String,
             default: ''
+        },
+        disabled: {
+            type: Boolean,
+            default: false
         }
     },
     emits: ['update:modelValue', 'findSuggestions'],

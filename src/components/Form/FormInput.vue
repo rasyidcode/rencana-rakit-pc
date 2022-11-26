@@ -7,13 +7,15 @@
             focus:ring-0" :placeholder="placeholderText"
             :value="modelValue"
             :class="{
-                'border-red-500 focus:border-red-500': hasError
+                'border-red-500 focus:border-red-500': hasError,
+                'text-gray-500': disabled
             }"
             @input="$emit('update:modelValue', $event.target.value)"
             @blur="$emit('inputBlur')" 
             @focus="$emit('inputFocus')"
             @keyup="$emit('typingKeyUp')"
-            @keydown="$emit('typingKeyDown')">
+            @keydown="$emit('typingKeyDown')"
+            :disabled="disabled">
         <p v-if="!hasError" class="text-[11px] italic font-semibold text-gray-400">{{ helperText }}</p>
         <p v-else class="text-[11px] font-semibold text-red-500">{{ errorMessage }}</p>
     </div>
@@ -54,6 +56,10 @@ export default {
         errorMessage: {
             type: String,
             default: ''
+        },
+        disabled: {
+            type: Boolean,
+            default: false
         }
     },
     emits: [

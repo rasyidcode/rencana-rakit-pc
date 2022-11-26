@@ -64,11 +64,13 @@ export default {
         try {
             const docsSnapshot = await getDocs(query(componentsCollection, where('type', '==', this.$route.params.type), orderBy('createdAt', 'asc'), limit(10)));
             this.components = docsSnapshot.docs.map(doc => {
-                return {
+                const component = {
                     ...doc.data(),
                     id: doc.id,
                     ref: doc.ref
-                }
+                };
+                component.prices.sort((a, b) => a.checkedAt < b.checkedAt ? 1 : -1);
+                return component;
             });
         } catch (e) {
             console.log(e);
@@ -95,11 +97,13 @@ export default {
 
                         if (!nextSnapshot.empty) {
                             this.components.push(...nextSnapshot.docs.map(doc => {
-                                return {
+                                const component = {
                                     ...doc.data(),
                                     id: doc.id,
                                     ref: doc.ref
                                 };
+                                component.prices.sort((a, b) => a.checkedAt < b.checkedAt ? 1 : -1);
+                                return component;
                             }));
                         } else {
                             this.isLastData = true;

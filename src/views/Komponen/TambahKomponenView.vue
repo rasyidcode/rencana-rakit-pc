@@ -1,23 +1,23 @@
 <template>
     <div class="p-5 h-full relative">
         <Transition>
-            <NotificationPopup v-if="notification.isShow" :message="notification.message"
-                @close="closeNotification" @timer-finished="closeNotification"
-                :type="notification.type" />
+            <NotificationPopup v-if="notification.isShow" :message="notification.message" @close="closeNotification"
+                @timer-finished="closeNotification" :type="notification.type" />
         </Transition>
 
         <!-- <button @click="showNotification = true">Show Notif</button> -->
 
-        <PageTitle text="Tambah Komponen" :withBack="true" :path="`/komponen/${$route.params.type}`" class="mb-5" />
+        <PageTitle text="Tambah Komponen" :withBack="true"
+            :path="$route.query.nama ? '' : `/komponen/${$route.params.type}`" class="mb-5" />
 
         <div class="h-4/5 flex flex-col gap-3 overflow-y-scroll scrollbar pr-3 py-3">
             <FormDropdown v-model="form.komponen.value" :label-text="'Komponen'" :placeholder-option="'Pilih Komponen'"
-                :has-error="form.komponen.hasError" :error-message="form.komponen.errMessage"
-                :options="komponenOptions" :disabled="true" />
+                :has-error="form.komponen.hasError" :error-message="form.komponen.errMessage" :options="komponenOptions"
+                :disabled="true" />
             <FormInputSuggestion v-model="form.nama.value" @find-suggestions="findSuggestions"
                 :suggestionLoading="suggestionLoading" :label-text="'Nama'" :placeholder-text="'Masukkan Nama'"
                 :helper-text="'Contoh: GTX 770 2GB DDR5'" :suggestions="nameSuggestions" :has-error="form.nama.hasError"
-                :error-message="form.nama.errMessage" />
+                :error-message="form.nama.errMessage" :disabled="$route.query.nama ? true : false" />
             <FormInputHarga v-model="form.harga.value" :labelText="'Harga'" :placeholderText="'Masukkan Harga'"
                 :helperText="'Contoh: Rp. 1.100.000,00'" :has-error="form.harga.hasError"
                 :error-message="form.harga.errMessage" />
@@ -157,9 +157,9 @@ export default {
                     this.suggestionLoading = true;
 
                     getDocs(query(
-                            componentsCollection,
-                            where('type', '==', val))
-                        )
+                        componentsCollection,
+                        where('type', '==', val))
+                    )
                         .then(docRef => {
                             if (docRef.docs.length > 0) {
                                 docRef.docs.forEach(doc => {
@@ -278,7 +278,7 @@ export default {
             addDoc(componentsCollection, formData)
                 .then(docRef => {
                     console.log('Doc created with ID:', docRef.id);
-                    
+
                     // sync local data
                     this
                         .suggestions[`${formData.type}List`]
@@ -350,15 +350,16 @@ export default {
             this.notification.isShow = false;
         },
         clearForm() {
-            this.form.komponen.value    = this.$route.params.type;
-            this.form.nama.value        = null;
-            this.form.harga.value       = null;
+            this.form.komponen.value = this.$route.params.type;
+            this.form.nama.value = null;
+            this.form.harga.value = null;
             this.form.checkedDate.value = null;
-            this.form.linkSource.value  = null;
+            this.form.linkSource.value = null;
         }
     },
     mounted() {
         this.form.komponen.value = this.$route.params.type;
+        this.form.nama.value = this.$route.query.nama;
     }
 }
 </script>
