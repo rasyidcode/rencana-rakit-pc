@@ -45,18 +45,18 @@ import {
     updateDoc,
     doc
 } from 'firebase/firestore';
-import { firestore } from '../../firebase';
+import { firestore } from '../../../firebase';
 import { Transition } from 'vue';
 
 // components
-import PageTitle from '../../components/Text/PageTitle.vue';
-import FormInput from '../../components/Form/FormInput.vue';
-import FormTextarea from '../../components/Form/FormTextarea.vue';
-import FormInputHarga from '../../components/Form/FormInputHarga.vue';
-import FormInputSuggestion from '../../components/Form/FormInputSuggestion.vue';
-import FormDropdown from '../../components/Form/FormDropdown.vue';
-import FormButton from '../../components/Form/FormButton.vue';
-import NotificationPopup from '../../components/NotificationPopup.vue';
+import PageTitle from '../../../components/Text/PageTitle.vue';
+import FormInput from '../../../components/Form/FormInput.vue';
+import FormTextarea from '../../../components/Form/FormTextarea.vue';
+import FormInputHarga from '../../../components/Form/FormInputHarga.vue';
+import FormInputSuggestion from '../../../components/Form/FormInputSuggestion.vue';
+import FormDropdown from '../../../components/Form/FormDropdown.vue';
+import FormButton from '../../../components/Form/FormButton.vue';
+import NotificationPopup from '../../../components/NotificationPopup.vue';
 
 // define vars
 const componentsCollection = collection(firestore, 'components');
