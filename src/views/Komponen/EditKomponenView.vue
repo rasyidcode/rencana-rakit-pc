@@ -1,9 +1,9 @@
 <template>
-    <h1>Edit Komponen</h1>
-    <p>ID : {{ $route.params.komponenId }}</p>
+    <h1>EditKomponenView</h1>
 </template>
 
 <script>
+
 export default {
     name: 'EditKomponenView'
 }

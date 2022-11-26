@@ -3,7 +3,7 @@
         <PageTitle text="Detail Komponen" :with-back="true" :path="`/komponen/${$route.params.type}`" />
 
         <div v-if="komponen"
-            class="flex flex-col mt-5 gap-3 border py-2 px-4 border-emerald-400 rounded-sm h-4/5 border-dashed">
+            class="flex flex-col mt-5 gap-3 border py-2 px-4 border-emerald-300 rounded-sm h-4/5">
             <div>
                 <h2 class="font-bold">Komponen</h2>
                 <p>{{ $route.params.type.toUpperCase() }}</p>
@@ -16,21 +16,21 @@
                 <div class="flex justify-between items-center mb-1">
                     <h2 class="font-bold">Harga</h2>
                     <button @click="$router.push({
-                        name: 'tambah-komponen-view',
+                        name: 'manage-komponen-view',
                         params: {
                             type: $route.params.type
                         },
                         query: {
-                            nama: komponen.name
+                            nama: komponen.name,
                         }
                     })" class="text-[12px] bg-emerald-500 text-white font-semibold px-2 rounded-sm hover:bg-emerald-800
                     transition duration-150 ease-in-out">
                         <font-awesome-icon icon="fa-solid fa-add" /> Tambah Harga
                     </button>
                 </div>
-                <div class="flex flex-col border py-2 px-4">
+                <div class="flex flex-col border py-2 px-4 border-emerald-300 divide-y divide-dashed divide-emerald-400">
                     <div v-for="(prc, i) in komponen.prices" :key="i" class="flex">
-                        <div class="flex-1">
+                        <div class="flex-1 py-1">
                             <font-awesome-icon @click.stop="goToURL(prc.linkSource)" icon="fa-solid fa-link"
                                 class="mr-2 text-blue-500 cursor-pointer hover:text-blue-300 transition duration-150 ease-in-out" />
                             <span class="font-medium text-emerald-500">{{ rupiahFormat(prc.price) }}</span>

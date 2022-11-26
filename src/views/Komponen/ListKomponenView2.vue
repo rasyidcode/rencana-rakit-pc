@@ -7,8 +7,12 @@
         <div class="flex items-center justify-between mb-4">
             <button type="button" class="bg-emerald-500 text-sm
                 text-white px-2 rounded-sm hover:bg-emerald-700
-                transition duration-150 ease-in-out tracking-wide"
-                @click="$router.push(`/komponen/${$route.params.type}/tambah`)">
+                transition duration-150 ease-in-out tracking-wide" @click="$router.push({
+                    name: 'manage-komponen-view',
+                    params: {
+                        type: $route.params.type
+                    }
+                })">
                 <font-awesome-icon icon="fa-solid fa-plus" /> Tambah Komponen
             </button>
         </div>
@@ -16,8 +20,8 @@
         <div @scroll="loadMore" v-if="components.length > 0" class="flex-1 flex flex-col divide-y scrollbar pr-3 overflow-y-scroll
             pb-2.5 mb-12">
             <ItemKomponen v-for="komponen in components" :key="komponen.id" :name="komponen.name"
-                :harga="komponen.prices[0].price" :link="komponen.prices[0].linkSource" :komponenId="komponen.id"
-                @item-hapus="showAlertHapus(komponen.id, komponen.ref)" />
+                :harga="komponen.prices[0].price" :link="komponen.prices[0].linkSource" :komponen-id="komponen.id"
+                :price-id="komponen.prices[0].id" @item-hapus="showAlertHapus(komponen.id, komponen.ref)" />
         </div>
         <div v-else class="flex justify-center items-center h-full">
             <h3 class="font-normal text-base text-gray-600
@@ -127,7 +131,7 @@ export default {
         },
         async hapusKomponen() {
             await deleteDoc(this.hapusData.ref);
-            
+
             this.components = this.components.filter(komponen => komponen.id !== this.hapusData.id);
             this.showAlert = false;
             this.hapusData = null;

@@ -17,10 +17,13 @@
                     <font-awesome-icon icon="fa-solid fa-link" class=" w-3 h-3 text-white self-center" />
                 </button>
                 <button @click.stop="$router.push({
-                    name: 'edit-komponen-view',
+                    name: 'manage-komponen-view',
                     params: {
-                        komponenId: komponenId,
                         type: $route.params.type
+                    },
+                    query: {
+                        komponenId: komponenId,
+                        priceId: priceId
                     }
                 })" class=" bg-orange-500 rounded-full px-1.5 flex
                     hover:bg-orange-700 transition duration-150
@@ -44,6 +47,10 @@ export default {
         komponenId: {
             type: String,
             required: true,
+        },
+        priceId: {
+            type: Number,
+            required: true
         },
         name: {
             type: String,

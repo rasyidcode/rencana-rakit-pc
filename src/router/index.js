@@ -3,9 +3,10 @@ import { createRouter, createWebHashHistory } from "vue-router";
 // Komponen View
 import KomponenGridView from '../views/Komponen/KomponenGridView.vue';
 import ListKomponenView2 from '../views/Komponen/ListKomponenView2.vue';
-import TambahKomponenView from '../views/Komponen/TambahKomponenView.vue';
-import EditKomponenView from '../views/Komponen/EditKomponenView.vue';
+import ManageKomponenView from '../views/Komponen/ManageKomponenView.vue';
 import DetailKomponenView from '../views/Komponen/DetailKomponenView.vue';
+// import TambahKomponenView from '../views/Komponen/TambahKomponenView.vue';
+// import EditKomponenView from '../views/Komponen/EditKomponenView.vue';
 
 // Ide View
 // import ListIdeView from '../views/ListIdeView.vue';
@@ -56,9 +57,9 @@ const routes = [
         beforeEnter: [validateKomponenType]
     },
     {
-        path: '/komponen/:type/tambah',
-        name: 'tambah-komponen-view',
-        component: TambahKomponenView,
+        path: '/komponen/:type/manage',
+        name: 'manage-komponen-view',
+        component: ManageKomponenView,
         meta: { requiredAuth: true, validateType: true },
         beforeEnter: [validateKomponenType]
     },
@@ -70,18 +71,36 @@ const routes = [
         beforeEnter: [validateKomponenType]
     },
     {
-        path: '/komponen/:type/:komponenId/edit',
-        name: 'edit-komponen-view',
-        component: EditKomponenView,
-        meta: { requiredAuth: true, validateType: true },
-        beforeEnter: [validateKomponenType]
-    },
-    {
         path: '/',
         name: 'rencana-view',
         component: RencanaView,
         meta: { requiredAuth: true }
     },
+    {
+        path: '/login',
+        name: 'login-view',
+        component: LoginView,
+        meta: { guest: true }
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        name: 'notfound-view',
+        component: NotFoundView,
+    },
+    // {
+    //     path: '/komponen/:type/tambah',
+    //     name: 'tambah-komponen-view',
+    //     component: TambahKomponenView,
+    //     meta: { requiredAuth: true, validateType: true },
+    //     beforeEnter: [validateKomponenType]
+    // },
+    // {
+    //     path: '/komponen/:type/:komponenId/edit',
+    //     name: 'edit-komponen-view',
+    //     component: EditKomponenView,
+    //     meta: { requiredAuth: true, validateType: true },
+    //     beforeEnter: [validateKomponenType]
+    // },
     // {
     //     path: '/tambah-rencana',
     //     name: 'tambah-rencana-view',
@@ -100,12 +119,6 @@ const routes = [
     //     component: ListIdeView,
     //     meta: { requiredAuth: true }
     // },
-    {
-        path: '/login',
-        name: 'login-view',
-        component: LoginView,
-        meta: { guest: true }
-    },
     // {
     //     path: '/register',
     //     name: 'register-view',
@@ -130,11 +143,6 @@ const routes = [
     //     component: EditRencanaView,
     //     meta: { requiredAuth: true }
     // },
-    {
-        path: '/:pathMatch(.*)*',
-        name: 'notfound-view',
-        component: NotFoundView,
-    },
 ]
 
 const router = createRouter({
