@@ -41,27 +41,27 @@ function validateKomponenType(to) {
 const routes = [
     // #region Komponen Route
     {
-        path: '/rencana-rakit-pc/komponen',
+        path: '/komponen',
         name: 'komponen-grid-view',
         component: KomponenGridView,
         meta: { requiredAuth: true, module: 'komponen' },
     },
     {
-        path: '/rencana-rakit-pc/komponen/:type',
+        path: '/komponen/:type',
         name: 'list-komponen-view2',
         component: ListKomponenView2,
         meta: { requiredAuth: true, validateType: true, module: 'komponen' },
         beforeEnter: [validateKomponenType]
     },
     {
-        path: '/rencana-rakit-pc/komponen/:type/manage',
+        path: '/komponen/:type/manage',
         name: 'manage-komponen-view',
         component: ManageKomponenView,
         meta: { requiredAuth: true, validateType: true, module: 'komponen' },
         beforeEnter: [validateKomponenType]
     },
     {
-        path: '/rencana-rakit-pc/komponen/:type/:komponenId',
+        path: '/komponen/:type/:komponenId',
         name: 'detail-komponen-view',
         component: DetailKomponenView,
         meta: { requiredAuth: true, validateType: true, module: 'komponen' },
@@ -70,7 +70,7 @@ const routes = [
     // #endregion
     // #region Ide Route
     {
-        path: '/rencana-rakit-pc/ide',
+        path: '/ide',
         name: 'list-ide-view',
         component: ListIdeView,
         meta: { requiredAuth: true, module: 'ide' },
@@ -78,20 +78,20 @@ const routes = [
     // #endregion
     // #region Rencana Route
     {
-        path: '/rencana-rakit-pc/',
+        path: '/',
         name: 'rencana-view',
         component: RencanaView,
         meta: { requiredAuth: true, module: 'rencana' }
     },
     // #endregion
     {
-        path: '/rencana-rakit-pc/login',
+        path: '/login',
         name: 'login-view',
         component: LoginView,
         meta: { guest: true }
     },
     {
-        path: '/rencana-rakit-pc/:pathMatch(.*)*',
+        path: '/:pathMatch(.*)*',
         name: 'notfound-view',
         component: NotFoundView,
     },
