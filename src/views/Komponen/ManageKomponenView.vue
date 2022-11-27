@@ -1,5 +1,5 @@
 <template>
-    <div class="p-5 h-full relative">
+    <PageContainer class="relative flex flex-col">
         <Transition>
             <NotificationPopup v-if="notification.isShow" :message="notification.message" @close="closeNotification"
                 @timer-finished="closeNotification" :type="notification.type" />
@@ -8,7 +8,7 @@
         <PageTitle :text="`${(komponenId ? 'Edit' : 'Tambah')} Komponen`" :withBack="true"
             :path="$route.query.nama ? '' : `/komponen/${$route.params.type}`" class="mb-5" />
 
-        <div class="h-4/5 flex flex-col gap-3 overflow-y-scroll scrollbar pr-3 py-3">
+        <div class="flex flex-col gap-3 overflow-y-auto scrollbar pr-3 py-3">
             <FormDropdown v-model="form.komponen.value" :label-text="'Komponen'" :placeholder-option="'Pilih Komponen'"
                 :has-error="form.komponen.hasError" :error-message="form.komponen.errMessage" :options="komponenOptions"
                 :disabled="true" />
@@ -28,7 +28,7 @@
                 :has-error="form.linkSource.hasError" :error-message="form.linkSource.errMessage" />
             <FormButton @click="submitForm" :loading="formLoading" text="Submit" class="mx-auto" />
         </div>
-    </div>
+    </PageContainer>
 </template>
 
 <script>
@@ -55,6 +55,7 @@ import FormInputSuggestion from '../../components/Form/FormInputSuggestion.vue';
 import FormDropdown from '../../components/Form/FormDropdown.vue';
 import FormButton from '../../components/Form/FormButton.vue';
 import NotificationPopup from '../../components/NotificationPopup.vue';
+import PageContainer from '../../components/PageContainer.vue';
 
 // define vars
 const componentsCollection = collection(firestore, 'components');
@@ -62,22 +63,24 @@ const componentsCollection = collection(firestore, 'components');
 export default {
     name: 'TambahKomponenView',
     components: {
-        PageTitle,
-        FormInput,
-        FormInputHarga,
-        FormDropdown,
-        FormTextarea,
-        FormButton,
-        FormInputSuggestion,
-        NotificationPopup,
-        Transition,
-    },
+    PageTitle,
+    FormInput,
+    FormInputHarga,
+    FormDropdown,
+    FormTextarea,
+    FormButton,
+    FormInputSuggestion,
+    NotificationPopup,
+    Transition,
+    PageContainer
+},
     data() {
         return {
             form: {
                 komponen: {
                     value: '',
                     hasError: false,
+                    errMessage: '',
                     rules: [
                         { 'required': 'Pilih salah satu komponen!' },
                     ]
@@ -216,13 +219,13 @@ export default {
                     .push(formData);
 
                 this.showNotification('success', 'Data berhasil ditambahkan!');
-                this.formLoading = false;
             } catch (e) {
                 console.log('firebase err: ', e);
 
                 this.showNotification('error', 'Something went wrong!');
-                this.formLoading = false;
             }
+
+            this.formLoading = false;
         },
         async updateKomponenPrice(formData, komponenIndex) {
             const formPrice = formData.prices[0];
@@ -260,6 +263,9 @@ export default {
         },
         async updateData(formData) {
             try {
+                if ('createdAt' in formData) {
+                    delete formData.createdAt;
+                }
                 // check if name already exist
                 const komponenIndex = this
                     .suggestions[`${formData.type}List`]
@@ -281,8 +287,7 @@ export default {
                         this
                             .suggestions[`${formData.type}List`][komponenIndex] = formData;
 
-                        this.showNotification('success', 'Data berhasil diperbaharui!');
-                        this.formLoading = false;
+                        this.showNotification('success', 'Data berhasil diperbaharui!');                        
                     } else {
                         throw "priceIndex not found";
                     }
@@ -293,8 +298,9 @@ export default {
                 console.log('firebase err: ', e);
 
                 this.showNotification('error', 'Something went wrong!');
-                this.formLoading = false;
             }
+
+            this.formLoading = false;
         },
         async submitForm() {
             this.formLoading = true;

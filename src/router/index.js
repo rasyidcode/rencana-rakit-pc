@@ -75,6 +75,12 @@ const routes = [
         component: ListIdeView,
         meta: { requiredAuth: true, module: 'ide' },
     },
+    {
+        path: '/ide/manage',
+        name: 'manage-ide-view',
+        component: ManageIdeView,
+        meta: { requiredAuth: true, module: 'ide' },
+    },
     // #endregion
     // #region Rencana Route
     {
