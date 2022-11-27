@@ -1,8 +1,8 @@
 <template>
-    <PageContainer>
-        <PageTitle :text="'Komponen'" class="mb-8" />
+    <PageContainer class="flex flex-col p-0">
+        <PageTitle :text="'Komponen'" class="mb-4 pt-5 px-5" />
 
-        <div class="grid grid-cols-2 gap-5">
+        <div class="grid grid-cols-2 gap-5 overflow-y-auto scrollbar px-5 py-5">
             <KategoriKomponenCard :title="'Motherboard'" :icon="'fa-solid fa-keyboard'"
                 @click="$router.push({ name: 'list-komponen-view2', params: { type: 'motherboard' } })" />
             <KategoriKomponenCard :title="'Processor'" :icon="'fa-solid fa-microchip'"
@@ -30,10 +30,6 @@ export default {
         PageContainer,
         PageTitle,
         KategoriKomponenCard
-    },
-    data() {
-        return {
-        }
     }
 }
 </script>

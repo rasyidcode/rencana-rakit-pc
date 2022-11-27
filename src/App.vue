@@ -7,9 +7,11 @@
       </h4>
     </div>
 
-    <div class="mx-auto shadow-xl w-11/12 md:w-4/5 lg:w-3/5 xl:w-1/2 h-2/3 -mt-24 bg-white rounded-lg relative overflow-hidden">
-      <router-view />
-      <NavigationBar :hide="!isAuthenticated" @logout="showModal()" />
+    <div class="mx-auto shadow-xl h-2/3 w-11/12 md:w-4/5 lg:w-3/5 xl:w-1/2 -mt-24 bg-white rounded-lg overflow-hidden flex flex-col">
+      <div class="flex-1 overflow-hidden">
+        <router-view />
+      </div>
+      <NavigationBar :is-hide="!isAuthenticated" @logout="showModal()" />
     </div>
 
     <AlertDialog :message="'Anda yakin ingin logout?'" :showing="showingModal" @close="closeModal()" @yes="logout()" />

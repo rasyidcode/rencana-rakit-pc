@@ -16,7 +16,7 @@
                 </button>
             </div>
         </div>
-        <div class="mt-5 divide-y h-4/5 flex flex-col overflow-y-scroll scrollbar">
+        <div class="mt-5 divide-y h-full flex flex-col overflow-y-scroll scrollbar">
             <ItemRencana v-for="i in 10" :key="i" />
         </div>
     </div>
